@@ -29,7 +29,10 @@ class Workout(multiprocessing.Process):
         return psutil.cpu_percent(percpu=True)[self.affinity]
 
     def set_affinity(self):
-        p = psutil.Process(os.getppid())
+        try:
+            p = psutil.Process(os.getppid())
+        except Exception as e:
+            p = 1
         #p.cpu_affinity(self.affinity)
 
     def run(self):

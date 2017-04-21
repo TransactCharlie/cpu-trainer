@@ -42,7 +42,7 @@ class Sensei(multiprocessing.Process):
 
 class Deshi(multiprocessing.Process):
 
-    sample_period = 5000
+    sample_period = 1000
     rest_scaling = 0.003
 
     def __init__(self, name, instruction_queue, response_queue):

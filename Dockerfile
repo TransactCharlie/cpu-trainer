@@ -9,4 +9,4 @@ RUN apk add --update py-pip gcc g++ linux-headers\
  && pip install -r requirements.txt \
  && apk del py-pip gcc g++ linux-headers
 
-ENTRYPOINT ["python", "dojo.py"]
+ENTRYPOINT ["python", "dojo.py", "--cpu_target=80"]

@@ -3,6 +3,7 @@ import multiprocessing
 import time
 import queue
 import psutil
+import statistics
 
 
 class Sensei(multiprocessing.Process):
@@ -33,7 +34,7 @@ class Sensei(multiprocessing.Process):
                 self.students[c].put("+")
             reps += 1
             if reps % 100:
-                self.log.info(work)
+                self.log.info("Cores: %s => Mean: %s" % (work, statistics.mean(work)))
 
     def terminate(self):
         self.log.info("Thats enough for today everyone!")
@@ -80,7 +81,6 @@ class Deshi(multiprocessing.Process):
             if instruction == "-":
                 self.sleep_time += self.rest_scaling
                 self.log.debug("Slowing up... Rest Interval %s" % self.sleep_time)
-
 
             time.sleep(self.sleep_time)
 

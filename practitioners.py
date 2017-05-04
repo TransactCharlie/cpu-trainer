@@ -60,12 +60,12 @@ class Deshi(multiprocessing.Process):
     sample_period = 1000
     rest_scaling = 0.003
 
-    def __init__(self, name, instruction_queue, response_queue):
+    def __init__(self, name, instruction_queue, response_queue, do_work=False):
         self.log = logging.getLogger(name)
         self.sleep_time = 0.03
         self.instructions = instruction_queue
         self.responses = response_queue
-        self.do_work = False
+        self.do_work = do_work
         self.override_wait = 0
         # Call Super
         super().__init__()

@@ -32,7 +32,7 @@ def main(cpu_target, runtime, log_level):
     student_instructions = [multiprocessing.JoinableQueue() for i in range(CORES)]
     sensei_instructions = multiprocessing.JoinableQueue()
     responses = [multiprocessing.Queue() for i in range(CORES)]
-    deshis = [Deshi("Deshi %s" % i, student_instructions[i], responses[i]) for i in range(CORES)]
+    deshis = [Deshi("Deshi %s" % i, student_instructions[i], responses[i], True) for i in range(CORES)]
     sensei = Sensei(student_instructions, cpu_target, sensei_instructions)
 
     # Sensei Arrives and starts shouting at them...
@@ -58,7 +58,6 @@ def main(cpu_target, runtime, log_level):
         sensei_instructions.put("REST")
         return "RESTING"
 
-    begin()
     # start it
     from waitress import serve
     serve(app, host="0.0.0.0", port=8888)
